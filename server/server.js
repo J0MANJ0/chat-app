@@ -16,8 +16,8 @@ export const io = new Server(server, {
   cors: {
     origin: ['http://localhost:5173', 'https://chat-app-nu-rust.vercel.app'],
     credentials: true,
+    methods: ['GET', 'POST'],
   },
-  transports: ['polling'],
 });
 
 export const userSocketMap = {};
@@ -25,6 +25,7 @@ export const userSocketMap = {};
 io.on('connection', (socket) => {
   const userId = socket.handshake.query.userId;
   console.log('User connected', userId);
+  console.log('Cookies', socket.handshake.headers.cookie);
 
   if (userId) userSocketMap[userId] = socket.id;
 

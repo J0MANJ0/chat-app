@@ -85,13 +85,6 @@ export const login = async (req, res) => {
 
     const token = generateToken(user._id, res);
 
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 3600000,
-    });
-
     return res.json({
       success: true,
       user,
