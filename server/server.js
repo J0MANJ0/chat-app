@@ -37,7 +37,10 @@ app.use(express.json({ limit: '4mb' }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin:
+      process.env.NODE_ENV === 'production'
+        ? 'https://chat-room-zeta-peach.vercel.app'
+        : 'http://localhost:5173',
     credentials: true,
   })
 );
