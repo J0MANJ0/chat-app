@@ -14,10 +14,7 @@ const server = http.createServer(app);
 
 export const io = new Server(server, {
   cors: {
-    origin: [
-      'http://localhost:5173',
-      'https://chat-room-zeta-peach.vercel.app',
-    ],
+    origin: ['http://localhost:5173', 'https://chat-app-nu-rust.vercel.app'],
     credentials: true,
   },
 });
@@ -45,7 +42,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173', // ✅ Development frontend
-      'https://chat-room-zeta-peach.vercel.app', // ✅ Production frontend
+      'https://chat-app-nu-rust.vercel.app', // ✅ Production frontend
     ],
     credentials: true,
   })
