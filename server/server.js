@@ -17,6 +17,7 @@ export const io = new Server(server, {
     origin: ['http://localhost:5173', 'https://chat-app-nu-rust.vercel.app'],
     credentials: true,
   },
+  transports: ['polling'],
 });
 
 export const userSocketMap = {};
@@ -62,7 +63,7 @@ connectDB()
       );
     }
   })
-  .catch((err) => console.log(err));
+  .catch((err) => console.log('Database connection error:', err));
 
 // for vercel
 export default server;
