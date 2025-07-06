@@ -49,13 +49,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        // localStorage.removeItem('token')
-        // setToken(null)
-        // setAuthUser(null)
-        // setOnlineUsers([])
-        // axios.defaults.headers.common['token'] = null
-        // toast.success('Logged out successfully')
-        // socket.disconnect()
 
         try {
             const { data } = await axios.post('/api/auth/logout')
@@ -89,7 +82,9 @@ export const AuthProvider = ({ children }) => {
         const newSocket = io(backendUrl, {
             query: {
                 userId: userData._id,
-            }
+
+            },
+            withCredentials: true
         })
         newSocket.connect()
         setSocket(newSocket)
