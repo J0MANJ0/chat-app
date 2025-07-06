@@ -47,16 +47,20 @@ app.get('/api/status', (_, res) => res.send('Server is live'));
 app.use('/api/auth', userRouter);
 app.use('/api/messages', messageRouter);
 
-const PORT = process.env.PORT || 5000;
-
 // const token = crypto.randomBytes(128).toString('hex');
 
 // console.log(token);
 
 connectDB()
   .then(() => {
-    server.listen(PORT, () =>
-      console.log(`Server running on http://localhost:${PORT}`)
-    );
+    if (process.env.NODE_ENV !== 'production') {
+      const PORT = process.env.PORT || 5000;
+      server.listen(PORT, () =>
+        console.log(`Server running on http://localhost:${PORT}`)
+      );
+    }
   })
   .catch((err) => console.log(err));
+
+// for vercel
+export default server;
