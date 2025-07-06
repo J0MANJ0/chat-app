@@ -50,10 +50,6 @@ app.get('/api/status', (_, res) => res.send('Server is live'));
 app.use('/api/auth', userRouter);
 app.use('/api/messages', messageRouter);
 
-// const token = crypto.randomBytes(128).toString('hex');
-
-// console.log(token);
-
 connectDB()
   .then(() => {
     if (process.env.NODE_ENV !== 'production') {
