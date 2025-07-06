@@ -25,7 +25,6 @@ export const userSocketMap = {};
 io.on('connection', (socket) => {
   const userId = socket.handshake.query.userId;
   console.log('User connected', userId);
-  console.log('Cookies', socket.handshake.headers.cookie);
 
   if (userId) userSocketMap[userId] = socket.id;
 
