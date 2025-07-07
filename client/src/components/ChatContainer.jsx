@@ -90,11 +90,12 @@ const ChatContainer = () => {
                         <img src={assets.gallery_icon} alt="" className='w-5 mr-2 cursor-pointer' />
                     </label>
                 </div>
-                <button
+                {<button
                     onClick={handleSendMessage}
+                    disabled={!input}
                     className='flex items-center justify-end bg-blue-600 hover:bg-blue-400 rounded-full size-11 cursor-pointer p-2'>
                     <SendIcon />
-                </button>
+                </button>}
             </div>
         </div>
     ) : (
