@@ -7,7 +7,7 @@ const connectDB = async () => {
     );
     await mongoose.connect(`${process.env.MONGODB_URI}/quick_chat`);
   } catch (error) {
-    console.log(error);
+    console.log('Error connecting DB:', error);
   }
 };
 

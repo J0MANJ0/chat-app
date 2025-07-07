@@ -14,10 +14,24 @@ const server = http.createServer(app);
 
 export const io = new Server(server, {
   cors: {
-    origin: ['http://localhost:5173', 'https://chat-app-nu-rust.vercel.app'],
+    origin: [
+      'http://localhost:5173',
+      'https://chat-app-nu-rust.vercel.app',
+      'https://*.vercel.app',
+    ],
     credentials: true,
     methods: ['GET', 'POST'],
   },
+  transports: ['polling'],
+});
+
+io.engine.on('connection_error', (err) => {
+  console.error('Socket.IO connection error:', {
+    message: err.message,
+    context: err.context,
+    code: err.code,
+    request: err.req, // Log request details
+  });
 });
 
 export const userSocketMap = {};
@@ -43,7 +57,8 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173', // ✅ Development frontend
-      'https://chat-app-nu-rust.vercel.app', // ✅ Production frontend
+      'https://chat-app-nu-rust.vercel.app',
+      'https://*.vercel.app', // ✅ Production frontend
     ],
     credentials: true,
   })
