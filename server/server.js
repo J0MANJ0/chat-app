@@ -14,15 +14,11 @@ const server = http.createServer(app);
 
 export const io = new Server(server, {
   cors: {
-    origin: [
-      'http://localhost:5173',
-      'https://chat-app-nu-rust.vercel.app',
-      'https://*.vercel.app',
-    ],
+    origin: ['http://localhost:5173', 'https://chat-app-nu-rust.vercel.app'],
     credentials: true,
     methods: ['GET', 'POST'],
   },
-  transports: ['polling'],
+  transports: ['polling', 'websocket'],
 });
 
 io.engine.on('connection_error', (err) => {
@@ -57,8 +53,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173', // ✅ Development frontend
-      'https://chat-app-nu-rust.vercel.app',
-      'https://*.vercel.app', // ✅ Production frontend
+      'https://chat-app-nu-rust.vercel.app', // ✅ Production frontend
     ],
     credentials: true,
   })

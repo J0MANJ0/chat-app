@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     const connectSocket = (userData) => {
         if (!userData || socket?.connected) return
 
-        console.log(userData)
+        console.log({ userData })
 
         const newSocket = io(backendUrl, {
             query: {
@@ -102,6 +102,7 @@ export const AuthProvider = ({ children }) => {
         }
         checkAuth()
     }, [])
+
     const value = {
         axios,
         authUser,
