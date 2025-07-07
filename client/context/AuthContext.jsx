@@ -35,10 +35,10 @@ export const AuthProvider = ({ children }) => {
             if (data.success) {
                 setAuthUser(data.user)
                 connectSocket(data.user)
-                axios.defaults.headers.common['token'] = data.token
+                axios.defaults.headers.common['auth_token'] = data.token
 
                 setToken(data.token)
-                localStorage.setItem('token', data.token)
+                localStorage.setItem('auth_token', data.token)
                 toast.success(data.message)
             } else {
                 toast.error(data.message)
@@ -96,7 +96,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         if (token) {
-            axios.defaults.headers.common['token'] = token
+            axios.defaults.headers.common['auth_token'] = token
         }
         checkAuth()
     }, [])

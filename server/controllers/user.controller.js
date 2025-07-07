@@ -102,7 +102,7 @@ export const login = async (req, res) => {
 
 export const logout = async (_, res) => {
   try {
-    res.clearCookie('token', {
+    res.clearCookie('auth_token', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
