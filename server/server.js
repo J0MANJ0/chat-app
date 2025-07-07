@@ -48,7 +48,6 @@ io.on('connection', (socket) => {
   });
 });
 
-const __dirname = path.resolve();
 app.use(express.json({ limit: '4mb' }));
 app.use(cookieParser());
 app.use(
@@ -66,13 +65,6 @@ app.get('/api/status', (_, res) => res.send('Server is live'));
 app.use('/api/auth', userRouter);
 app.use('/api/messages', messageRouter);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/dist')));
-
-  app.get('*', (_, res) => {
-    res.sendFile(path.join(__dirname, '../client', 'dist', 'index.html'));
-  });
-}
 connectDB()
   .then(() => {
     if (process.env.NODE_ENV !== 'production') {
